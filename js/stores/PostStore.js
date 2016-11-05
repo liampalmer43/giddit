@@ -7,13 +7,20 @@ var Posts = require('../constants/Posts');
 
 var CHANGE_EVENT = 'change';
 
-var state = Posts;
+var state = [];
 
-//[{title: "t1", content: "c1aaa"},
-//             {title: "t2", content: "c2aaaa"}];
-
-function getPosts() {
-    return 0;
+function getPosts(param) {
+    var result = [];
+    var parts = param.split(" ... ");
+    var action = parts[0];
+    var subject = parts[1];
+    for (var i = 0; i < Posts.length; ++i) {
+        if (Posts[i]["action"] === action && Posts[i]["subject"] === subject) {
+            result.push(Posts[i]);
+        }
+    }
+    state = result;
+    PostStore.emitChange();
 }
 
 function upvote(id) {
@@ -61,7 +68,7 @@ AppDispatcher.register(function(action) {
 
     switch(action.actionType) {
         case PostConstants.GET_POSTS:
-            getPosts();
+            getPosts(action.param);
             break;
         case PostConstants.UPVOTE:
             upvote(action.id);
