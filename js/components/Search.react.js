@@ -1,5 +1,6 @@
 var React = require('react');
 var PostActions = require('../actions/PostActions');
+var PostStore = require('../stores/PostStore');
 
 var Button = require('react-bootstrap/lib/Button');
 var ButtonGroup = require('react-bootstrap/lib/ButtonGroup');
@@ -8,15 +9,18 @@ var Glyphicon = require('react-bootstrap/lib/Glyphicon');
 var Col = require('react-bootstrap/lib/Col');
 var Row = require('react-bootstrap/lib/Row');
 
-var Posts = require('../constants/Posts');
-var options = getTitles(Posts);
-
 function getTitles(posts) {
     var titles = [];
     for (var i = 0; i < posts.length; ++i) {
         titles.push(posts[i]["action"] + " ... " + posts[i]["subject"]);
     }
     return titles;
+}
+
+function getState() {
+    return {
+        posts: PostStore.getAllPosts()
+    };
 }
 
 var Search = React.createClass({
@@ -29,19 +33,41 @@ var Search = React.createClass({
         }
     },
 
+    _gotoCreate: function() {
+        PostActions.gotoCreate();
+    },
+
+    getInitialState: function() {
+        return getState();
+    },
+
+    componentDidMount: function() {
+        PostStore.addChangeListener(this._onChange);
+    },
+
+    componentWillUnmount: function() {
+        PostStore.removeChangeListener(this._onChange);
+    },
+
+
     render: function() {
+        var options = getTitles(this.state.posts);
         var optionViews = [];
         for (var i = 0; i < options.length; ++i) {
             optionViews.push(<option key={i} value={options[i]} />);
         }
 
-                  //<option value="Travel ... Sydney, Australia"/>
-                  //<option value="Live ... 555 Haight St, San Francisco, CA"/>
-                  //<option value="Learn ... Algorithms"/>
         return (
             <div className="search">
+                <div className="heading">
+                    <Row>
+                        <Col xs={6} sm={6} md={6} lg={6} className="title">Giddit</Col>
+                        <Col xs={6} sm={6} md={6} lg={6} className="userName">
+                            <p>lucaspalmer8</p><Button onClick={this._gotoCreate} className="createButton">+</Button>
+                        </Col>
+                    </Row>
+                </div>
                 <Row>
-                    <div className="title">Giddit</div>
                     <Col xs={6} xsOffset={3} sm={6} smOffset={3} md={6} mdOffset={3} lg={6} lgOffset={3} className="searchContainer">
                         <datalist id="posts">
                             {optionViews}}
@@ -52,6 +78,10 @@ var Search = React.createClass({
                 </Row>
             </div>
         );
+    },
+
+    _onChange: function() {
+        this.setState(getState());
     }
 });
 

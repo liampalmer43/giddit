@@ -3,6 +3,7 @@ var React = require('react');
 var Search = require('./Search.react');
 var Title = require('./Title.react');
 var Posts = require('./Posts.react');
+var Create = require('./Create.react');
 
 var Find = React.createClass({
 

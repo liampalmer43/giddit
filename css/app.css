@@ -1,3 +1,10 @@
+.create {
+    width: 650px;
+    max-width: 650px;
+    margin: auto;
+    color: #656973;
+}
+
 .post {
     width: 650px;
     max-width: 650px;
@@ -54,6 +61,10 @@ hr {
     margin-bottom: 12px;
 }
 
+textarea {
+    resize: none;
+}
+
 .searchInput {
     width: 100%;
     height: 55px;
@@ -78,13 +89,33 @@ hr {
     z-index: 1;
 }
 
+.heading {
+    background-color: #DAE3F7;
+}
+
 .title {
     font-family: "Big Caslon";
     font-weight: 500;
     color: #656973;
     font-size: 40px;
-    background-color: #DAE3F7;
-    padding: 0px 0px 0px 20px;
+    padding: 0px 0px 0px 25px;
+}
+
+.createTitle {
+    font-family: "Big Caslon";
+    font-weight: 500;
+    text-align: center;
+    color: #656973;
+    font-size: 40px;
+    padding: 15px 0px 15px 0px;
+}
+
+.userName {
+    text-align: right;
+    float: right;
+    font-size: 12;
+    color: #656973;
+    padding: 0px 25px 0px 0px;
 }
 
 .placeHolder {
@@ -93,8 +124,6 @@ hr {
     background-color: white;
 }
 
-.userName {
-    text-align: right-justify;
-    font-size: 12;
-    color: #656973;
+.createButton {
+    margin-top: -10px;
 }

@@ -5,6 +5,8 @@ module.exports = keyMirror({
     // PERSONAL_PROJECTS: null,
     // Actions
     GET_POSTS: null,
+    CREATE_POST: null,
     UPVOTE: null,
-    DOWNVOTE: null
+    DOWNVOTE: null,
+    GOTO_CREATE: null
 });

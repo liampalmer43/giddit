@@ -8,6 +8,12 @@ var PostActions = {
             param: param
         });
     },
+    createPost: function(params) {
+        AppDispatcher.dispatch({
+            actionType: PostConstants.CREATE_POST,
+            params: params
+        });
+    },
     upvote: function(id) {
         AppDispatcher.dispatch({
             actionType: PostConstants.UPVOTE,
@@ -18,6 +24,11 @@ var PostActions = {
         AppDispatcher.dispatch({
             actionType: PostConstants.DOWNVOTE,
             id: id
+        });
+    },
+    gotoCreate: function() {
+        AppDispatcher.dispatch({
+            actionType: PostConstants.GOTO_CREATE
         });
     }
 };

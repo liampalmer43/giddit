@@ -8,6 +8,7 @@ var Posts = require('../constants/Posts');
 var CHANGE_EVENT = 'change';
 
 var state = [];
+var find = true;
 
 function getPosts(param) {
     var result = [];
@@ -20,6 +21,26 @@ function getPosts(param) {
         }
     }
     state = result;
+    PostStore.emitChange();
+}
+
+function getRandomId() {
+    var result = "";
+    for (var i = 0; i < 6; ++i) {
+        result += (Math.floor(Math.random() * 10)).toString();
+    }
+    return result;
+}
+
+function createPost(params) {
+    Posts.push({action: params["action"],
+                subject: params["subject"],
+                tags: [],
+                content: params["content"],
+                upvotes: 0,
+                downvotes: 0,
+                id: getRandomId()});
+    find = true;
     PostStore.emitChange();
 }
 
@@ -43,11 +64,25 @@ function downvote(id) {
     PostStore.emitChange();
 }
 
+function gotoCreate() {
+    find = false;
+    state = [];
+    PostStore.emitChange();
+}
+
 
 var PostStore = assign({}, EventEmitter.prototype, {
 
     getState: function() {
         return state;
+    },
+
+    getAllPosts: function() {
+        return Posts;
+    },
+
+    find: function() {
+        return find;
     },
 
     emitChange: function() {
@@ -70,11 +105,17 @@ AppDispatcher.register(function(action) {
         case PostConstants.GET_POSTS:
             getPosts(action.param);
             break;
+        case PostConstants.CREATE_POST:
+            createPost(action.params);
+            break;
         case PostConstants.UPVOTE:
             upvote(action.id);
             break;
         case PostConstants.DOWNVOTE:
             downvote(action.id);
+            break;
+        case PostConstants.GOTO_CREATE:
+            gotoCreate();
             break;
         default:
     }
