@@ -2,13 +2,37 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var PostConstants = require('../constants/PostConstants');
 var assign = require('object-assign');
-
-var Posts = require('../constants/Posts');
+var AWS = require('aws-sdk');
 
 var CHANGE_EVENT = 'change';
 
+//AWS.config.loadFromPath('./conf.json');
+AWS.config.update({
+      accessKeyId: "AKIAIB57YZIFYCCYQKYQ",
+      secretAccessKey: "QpPOEeIpnCXI8bpmkMFDBytpvjTIh0NbLI+NeIsK",
+      "region": "us-east-2"   //<- If you want send something to your bucket, you need take off this settings, because the S3 are global. 
+      //region: "us-west-1"
+  });
+var ep = new AWS.Endpoint('giddit.io.s3-website.us-east-2.amazonaws.com');
+var s3 = new AWS.S3();
+
+var Posts = []; //getS3Posts();//require('../constants/Posts');
 var state = Posts;
 var find = true;
+
+function getS3Posts() {
+    s3.listBuckets(function(err, data) {
+        if (err) {
+            console.log("Error", err);
+        } else {
+            console.log("Bucket List", data.Buckets);
+            console.log(data);
+            // Posts = ...
+            // state = ...
+            PostStore.emitChange();
+        }
+    });
+}
 
 function getPosts(param) {
 console.log(param);
@@ -37,20 +61,31 @@ console.log(param);
 
 function getRandomId() {
     var result = "";
-    for (var i = 0; i < 6; ++i) {
+    for (var i = 0; i < 20; ++i) {
         result += (Math.floor(Math.random() * 10)).toString();
     }
     return result;
 }
 
 function createPost(params) {
-    Posts.push({action: params["action"],
+    var post = {action: params["action"],
                 subject: params["subject"],
                 tags: [],
                 content: params["content"],
                 upvotes: 0,
                 downvotes: 0,
-                id: getRandomId()});
+                id: getRandomId()};
+    
+    var params = {Bucket: 'giddit.io', Key: post["id"], Body: JSON.stringify(post)};
+    s3.putObject(params, function(err, data) {
+        if (err) {
+            console.log("Error uploading data: ", err);
+        } else {
+            console.log("Success uploading data to S3");
+        }
+    });
+
+    Posts.push(post);
     find = true;
     PostStore.emitChange();
 }
@@ -115,6 +150,9 @@ AppDispatcher.register(function(action) {
     switch(action.actionType) {
         case PostConstants.GET_POSTS:
             getPosts(action.param);
+            break;
+        case PostConstants.GET_S3_POSTS:
+            getS3Posts();
             break;
         case PostConstants.CREATE_POST:
             createPost(action.params);
