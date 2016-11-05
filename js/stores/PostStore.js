@@ -8,11 +8,10 @@ var CHANGE_EVENT = 'change';
 
 //AWS.config.loadFromPath('./conf.json');
 AWS.config.update({
-      accessKeyId: "AKIAIB57YZIFYCCYQKYQ",
-      secretAccessKey: "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",
+      accessKeyId: "AKIAJQEZDVGM6UZJZRYA",
+      secretAccessKey: "+1pjn3wbehIS+FoQXYq83PLiWBUG6esnAiGHZxaj",
       "region": "us-east-2"   //<- If you want send something to your bucket, you need take off this settings, because the S3 are global. 
-      //region: "us-west-1"
-  });
+});
 var ep = new AWS.Endpoint('giddit.io.s3-website.us-east-2.amazonaws.com');
 var s3 = new AWS.S3();
 
@@ -21,6 +20,37 @@ var state = Posts;
 var find = true;
 
 function getS3Posts() {
+var params = {
+  Bucket: 'giddit.io', /* required */
+  RequestPayer: 'requester'
+};
+s3.listObjects(params, function(err, data) {
+  if (err) {
+    console.log(err, err.stack); // an error occurred
+  } else {     
+    console.log(data.Contents);
+    var ct = data.Contents;
+    for (var i = 0; i < ct.length; ++i) {
+var ps = {
+  Bucket: 'giddit.io', /* required */
+  Key: ct[i]["Key"]
+};
+s3.getObject(ps, function(err, data) {
+  if (err) {
+    console.log(err, err.stack); // an error occurred
+  } else {     
+    console.log(data.Body.toString());
+    console.log(JSON.parse(data.Body.toString()));
+    Posts.push(JSON.parse(data.Body.toString()));
+    PostStore.emitChange();
+  }
+});
+
+
+
+  }}
+});
+/*
     s3.listBuckets(function(err, data) {
         if (err) {
             console.log("Error", err);
@@ -32,6 +62,7 @@ function getS3Posts() {
             PostStore.emitChange();
         }
     });
+*/
 }
 
 function getPosts(param) {
