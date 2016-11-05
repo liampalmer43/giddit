@@ -34,15 +34,19 @@ var Posts = React.createClass({
 
     render: function() {
         var posts = this.state.posts;
-
         var postViews = [];
         for (var i = 0; i < posts.length; ++i) {
-            postViews.push(<Post key={i} title={posts[i]["title"]} content={posts[i]["content"]} />)
+            postViews.push(<Post key={i}
+                action={posts[i]["action"]}
+                subject={posts[i]["subject"]}
+                tags={posts[i]["tags"]}
+                content={posts[i]["content"]}
+                upvotes={posts[i]["upvotes"]}
+                downvotes={posts[i]["downvotes"]}
+                id={posts[i]["id"]} />)
         }
         return (
-            <div>
-                <div>"HI"</div>
-                <Post title={"T"} content={"C"} />
+            <div className="postContainer">
                 {postViews}
             </div>
         );

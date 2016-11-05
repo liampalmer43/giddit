@@ -3,13 +3,37 @@ var EventEmitter = require('events').EventEmitter;
 var PostConstants = require('../constants/PostConstants');
 var assign = require('object-assign');
 
+var Posts = require('../constants/Posts');
+
 var CHANGE_EVENT = 'change';
 
-var state = [{title: "t1", content: "c1aaa"},
-             {title: "t2", content: "c2aaaa"}];
+var state = Posts;
+
+//[{title: "t1", content: "c1aaa"},
+//             {title: "t2", content: "c2aaaa"}];
 
 function getPosts() {
     return 0;
+}
+
+function upvote(id) {
+    for (var i = 0; i < state.length; ++i) {
+        if (state[i]["id"] === id) {
+            state[i]["upvotes"] = state[i]["upvotes"] + 1;
+            break;
+        }
+    }
+    PostStore.emitChange();
+}
+
+function downvote(id) {
+    for (var i = 0; i < state.length; ++i) {
+        if (state[i]["id"] === id) {
+            state[i]["downvotes"] = state[i]["downvotes"] + 1;
+            break;
+        }
+    }
+    PostStore.emitChange();
 }
 
 
@@ -38,6 +62,12 @@ AppDispatcher.register(function(action) {
     switch(action.actionType) {
         case PostConstants.GET_POSTS:
             getPosts();
+            break;
+        case PostConstants.UPVOTE:
+            upvote(action.id);
+            break;
+        case PostConstants.DOWNVOTE:
+            downvote(action.id);
             break;
         default:
     }

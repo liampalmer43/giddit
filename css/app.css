@@ -1,0 +1,52 @@
+.post {
+    width: 650px;
+    max-width: 650px;
+    margin: auto;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.postContainer {
+}
+
+.postHeader {
+    font-size: 23px;
+    background-color: #DAE3F7;
+    padding: 5px 20px 5px 20px;
+}
+
+.postContent {
+    font-size: 15px;
+}
+
+.postBody {
+    margin: 0px 20px 12px 20px;
+}
+
+.postButton {
+    background-color: #DAE3F7;
+    color: black;
+}
+
+.postButton:hover {
+    background-color: #A8BDE8;
+    color: black;
+}
+
+.postButton:focus {
+    background-color: #DAE3F7;
+    color: black;
+}
+
+.tag {
+    font-size: 14px;
+    background-color: #DFE4EE;
+    color: black;
+    margin-top: 8px;
+}
+
+hr {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}

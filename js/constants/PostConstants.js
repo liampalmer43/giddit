@@ -4,5 +4,7 @@ module.exports = keyMirror({
     // Pages
     // PERSONAL_PROJECTS: null,
     // Actions
-    GET_POSTS: null
+    GET_POSTS: null,
+    UPVOTE: null,
+    DOWNVOTE: null
 });
