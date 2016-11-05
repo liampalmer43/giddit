@@ -20,14 +20,14 @@ var state = Posts;
 var find = true;
 
 function getS3Posts() {
-var params = {
-  Bucket: 'giddit.io', /* required */
-  RequestPayer: 'requester'
-};
-s3.listObjects(params, function(err, data) {
-  if (err) {
-    console.log(err, err.stack); // an error occurred
-  } else {     
+    var params = {
+        Bucket: 'giddit.io', /* required */
+        RequestPayer: 'requester'
+    };
+    s3.listObjects(params, function(err, data) {
+    if (err) {
+        console.log(err, err.stack); // an error occurred
+    } else {     
     console.log(data.Contents);
     var ct = data.Contents;
     for (var i = 0; i < ct.length; ++i) {

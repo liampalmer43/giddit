@@ -26,7 +26,9 @@ var Posts = React.createClass({
 
     componentDidMount: function() {
         PostStore.addChangeListener(this._onChange);
-        PostActions.getS3Posts();
+        if (PostStore.getAllPosts().length === 0) {
+            PostActions.getS3Posts();
+        }
     },
 
     componentWillUnmount: function() {
