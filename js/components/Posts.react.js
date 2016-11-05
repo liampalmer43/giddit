@@ -47,6 +47,7 @@ var Posts = React.createClass({
         }
         return (
             <div className="postContainer">
+                <div className="placeHolder"></div>
                 {postViews}
             </div>
         );

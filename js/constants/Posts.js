@@ -21,7 +21,23 @@ tags: ["Expert"],
 content: "The Art of Computer Programming gives unparalleled depth on many subjects.",
 upvotes: 64,
 downvotes: 6,
-id: "1236"}
+id: "1236"},
+
+{action: "Play",
+subject: "Sports",
+tags: [],
+content: "If you're playing in age group tournaments, always play up at least one level.  Getting better is a much better trade off for winning in the long run",
+upvotes: 909,
+downvotes: 88,
+id: "1237"},
+
+{action: "Play",
+subject: "Sports",
+tags: [],
+content: "If you're playing in age group tournaments, always play up at least one level.  Getting better is a much better trade off for winning in the long run",
+upvotes: 909,
+downvotes: 88,
+id: "1238"}
 ];
 
 module.exports = posts;

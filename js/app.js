@@ -3,8 +3,9 @@ var React = require('react');
 
 //var Website = require('./components/Website.react');
 var Posts = require('./components/Posts.react');
+var Find = require('./components/Find.react');
 
 ReactDOM.render(
-    <Posts />,
+    <Find />,
     document.getElementById('website')
 );
