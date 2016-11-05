@@ -7,20 +7,31 @@ var Posts = require('../constants/Posts');
 
 var CHANGE_EVENT = 'change';
 
-var state = [];
+var state = Posts;
 var find = true;
 
 function getPosts(param) {
+console.log(param);
+    if (param === "") {
+        state = Posts;
+        PostStore.emitChange();
+        return;
+    }
+
     var result = [];
     var parts = param.split(" ... ");
-    var action = parts[0];
-    var subject = parts[1];
-    for (var i = 0; i < Posts.length; ++i) {
-        if (Posts[i]["action"] === action && Posts[i]["subject"] === subject) {
-            result.push(Posts[i]);
+    if (parts.length === 2) {
+        var action = parts[0];
+        var subject = parts[1];
+        for (var i = 0; i < Posts.length; ++i) {
+            if (Posts[i]["action"] === action && Posts[i]["subject"] === subject) {
+                result.push(Posts[i]);
+            }
         }
+        state = result;
+    } else {
+        state = [];
     }
-    state = result;
     PostStore.emitChange();
 }
 

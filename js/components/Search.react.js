@@ -28,7 +28,6 @@ var Search = React.createClass({
     _getPosts: function(e) {
         if (e.keyCode === 13) {
             var param = document.getElementById("search").value;
-            console.log(param);
             PostActions.getPosts(param);
         }
     },
