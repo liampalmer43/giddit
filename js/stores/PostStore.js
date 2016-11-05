@@ -6,19 +6,20 @@ var AWS = require('aws-sdk');
 
 var CHANGE_EVENT = 'change';
 
-//AWS.config.loadFromPath('./conf.json');
+// AWS variables.
 AWS.config.update({
-      accessKeyId: "AKIAJQEZDVGM6UZJZRYA",
-      secretAccessKey: "+1pjn3wbehIS+FoQXYq83PLiWBUG6esnAiGHZxaj",
-      "region": "us-east-2"   //<- If you want send something to your bucket, you need take off this settings, because the S3 are global. 
+      accessKeyId: "AKIAISQBKMB2DZ4O2QRA",
+      secretAccessKey: "7PtM0jWS5yqV/Rl7zFLkTOUQSzWYU+kaczM6PVW0",
+      "region": "us-east-2"
 });
 var ep = new AWS.Endpoint('giddit.io.s3-website.us-east-2.amazonaws.com');
 var s3 = new AWS.S3();
 
-var Posts = []; //getS3Posts();//require('../constants/Posts');
+var Posts = []; //require('../constant/Posts')
 var state = Posts;
 var find = true;
 
+// Retrieve all posts from S3.
 function getS3Posts() {
     var params = {
         Bucket: 'giddit.io', /* required */
@@ -26,43 +27,27 @@ function getS3Posts() {
     };
     s3.listObjects(params, function(err, data) {
     if (err) {
-        console.log(err, err.stack); // an error occurred
+        console.log(err, err.stack);
     } else {     
-    console.log(data.Contents);
-    var ct = data.Contents;
-    for (var i = 0; i < ct.length; ++i) {
-var ps = {
-  Bucket: 'giddit.io', /* required */
-  Key: ct[i]["Key"]
-};
-s3.getObject(ps, function(err, data) {
-  if (err) {
-    console.log(err, err.stack); // an error occurred
-  } else {     
-    console.log(data.Body.toString());
-    console.log(JSON.parse(data.Body.toString()));
-    Posts.push(JSON.parse(data.Body.toString()));
-    PostStore.emitChange();
-  }
-});
-
-
-
-  }}
-});
-/*
-    s3.listBuckets(function(err, data) {
-        if (err) {
-            console.log("Error", err);
-        } else {
-            console.log("Bucket List", data.Buckets);
-            console.log(data);
-            // Posts = ...
-            // state = ...
-            PostStore.emitChange();
+        console.log(data.Contents);
+        var ct = data.Contents;
+        for (var i = 0; i < ct.length; ++i) {
+            var ps = {
+                Bucket: 'giddit.io', /* required */
+                Key: ct[i]["Key"]
+            };
+            s3.getObject(ps, function(err, data) {
+                if (err) {
+                    console.log(err, err.stack); // an error occurred
+                } else {     
+                    console.log(data.Body.toString());
+                    console.log(JSON.parse(data.Body.toString()));
+                    Posts.push(JSON.parse(data.Body.toString()));
+                    PostStore.emitChange();
+                }
+            });
         }
-    });
-*/
+    }});
 }
 
 function getPosts(param) {
