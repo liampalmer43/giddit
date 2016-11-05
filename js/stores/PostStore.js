@@ -8,8 +8,8 @@ var CHANGE_EVENT = 'change';
 
 // AWS variables.
 AWS.config.update({
-      accessKeyId: "AKIAISQBKMB2DZ4O2QRA",
-      secretAccessKey: "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",
+      accessKeyId: "AKIAJGTHCL75V2SQH76A",
+      secretAccessKey: "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",
       "region": "us-east-2"
 });
 var ep = new AWS.Endpoint('giddit.io.s3-website.us-east-2.amazonaws.com');
