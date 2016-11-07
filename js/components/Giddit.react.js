@@ -11,10 +11,11 @@ var Row = require('react-bootstrap/lib/Row');
 
 var Find = require('./Find.react');
 var Create = require('./Create.react');
+var Home = require('./Home.react');
 
 function getState() {
     return {
-        find: PostStore.find()
+        stage: PostStore.stage()
     };
 }
 
@@ -34,13 +35,17 @@ var Giddit = React.createClass({
 
     render: function() {
         content = <Create />;
-        switch(this.state.find) {
-            case true:
+console.log(this.state.stage);
+        switch(this.state.stage) {
+            case "find":
                 content = <Find />;
                 break;
+            case "create":
+                content = <Create />;
+                break;
             default:
+                content = <Home />;
         }
-
         return (
             <div className="giddit">
                 {content}

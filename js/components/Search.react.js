@@ -33,7 +33,7 @@ var Search = React.createClass({
     },
 
     _gotoCreate: function() {
-        PostActions.gotoCreate();
+        PostActions.setStage("create");
     },
 
     getInitialState: function() {
@@ -62,7 +62,7 @@ var Search = React.createClass({
                     <Row>
                         <Col xs={6} sm={6} md={6} lg={6} className="title">Giddit</Col>
                         <Col xs={6} sm={6} md={6} lg={6} className="userName">
-                            <p>lucaspalmer8</p><Button onClick={this._gotoCreate} className="createButton">+</Button>
+                            <Button onClick={this._gotoCreate} className="createButton">Create Post +</Button>
                         </Col>
                     </Row>
                 </div>

@@ -9,5 +9,5 @@ module.exports = keyMirror({
     CREATE_POST: null,
     UPVOTE: null,
     DOWNVOTE: null,
-    GOTO_CREATE: null
+    SET_STAGE: null
 });

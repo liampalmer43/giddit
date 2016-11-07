@@ -17,7 +17,7 @@ var s3 = new AWS.S3();
 
 var Posts = []; //require('../constant/Posts')
 var state = Posts;
-var find = true;
+var stage = "home";
 
 // Retrieve all posts from S3.
 function getS3Posts() {
@@ -102,7 +102,7 @@ function createPost(params) {
     });
 
     Posts.push(post);
-    find = true;
+    stage = "find";
     PostStore.emitChange();
 }
 
@@ -126,9 +126,8 @@ function downvote(id) {
     PostStore.emitChange();
 }
 
-function gotoCreate() {
-    find = false;
-    state = [];
+function setStage(s) {
+    stage = s;
     PostStore.emitChange();
 }
 
@@ -143,8 +142,8 @@ var PostStore = assign({}, EventEmitter.prototype, {
         return Posts;
     },
 
-    find: function() {
-        return find;
+    stage: function() {
+        return stage;
     },
 
     emitChange: function() {
@@ -179,8 +178,8 @@ AppDispatcher.register(function(action) {
         case PostConstants.DOWNVOTE:
             downvote(action.id);
             break;
-        case PostConstants.GOTO_CREATE:
-            gotoCreate();
+        case PostConstants.SET_STAGE:
+            setStage(action.stage);
             break;
         default:
     }

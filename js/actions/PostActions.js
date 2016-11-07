@@ -31,9 +31,10 @@ var PostActions = {
             id: id
         });
     },
-    gotoCreate: function() {
+    setStage: function(stage) {
         AppDispatcher.dispatch({
-            actionType: PostConstants.GOTO_CREATE
+            actionType: PostConstants.SET_STAGE,
+            stage: stage
         });
     }
 };
