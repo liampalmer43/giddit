@@ -47,7 +47,7 @@ var Home = React.createClass({
                     </Col>  
                     <Col xs={6} sm={6} md={6} lg={6}>
                         <Panel header="POST" bsStyle="info">
-                            <p>When you find yourself thinking, "I wish I know that before", help somebody else out with your advice.</p>
+                            <p>When you find yourself thinking, "I wish I knew that before", help somebody else out with your advice.</p>
                             <img className="appImage" src="photos/post.png" />
                         </Panel>
                     </Col>
