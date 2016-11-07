@@ -31,7 +31,7 @@ var Home = React.createClass({
             <div className="home">
                 <Navbar id="homeNavbar">
                     <Nav className="homeNav">
-                        <NavItem eventKey={2} onClick={this._prototype}>Prototype</NavItem>
+                        <NavItem eventKey={1}><Button onClick={this._prototype}>Prototype</Button> <Glyphicon glyph="arrow-left"></Glyphicon> CLICK HERE</NavItem>
                     </Nav>
                 </Navbar>
                 <div className="homePlaceHolder" />
