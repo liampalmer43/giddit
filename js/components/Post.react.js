@@ -18,7 +18,6 @@ var Post = React.createClass({
     },
 
     _downvote: function(id) {
-        console.log(id);
         PostActions.downvote(id);
     },
 
@@ -36,7 +35,6 @@ var Post = React.createClass({
             tagViews.push(<Badge key={i} className="tag" pullRight={true}>{tags[i]}</Badge>)
         }
 
-        //<Panel header={action + " ... " + subject} bsStyle="info" className="postHeader">
         return (
             <div className="post">
                 <p className="postHeader">{action + " ... " + subject}</p>

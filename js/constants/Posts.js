@@ -53,7 +53,31 @@ tags: [],
 content: "If you are planning to fly to Belize, consider taking a cheap flight to Mexico and then busing the rest of the way. You can end up saving a lot of money in return for sitting on a bus for the last 4 hours of your trip.",
 upvotes: 111,
 downvotes: 2,
-id: "1239"}
+id: "1239"},
+
+{action: "Visiting",
+subject: "Essex County, Southern Ontario, Canada",
+tags:[],
+content:"If you happen to find yourself in this area (near Windsor, Ontario) during the summer time, make sure to visit the Dairy Freeze.  It is a local favourite diner and ice-cream shop that serves soft serve ice cream cones bigger than you've ever seen!",
+upvotes:10,
+downvotes:1,
+id:"34357370198149956243"},
+
+{action:"Watching",
+subject:"Red Sox Game from Green Monster Standing Room",
+tags:[],
+content:"If you want to go to a Red Sox game and are considering buying tickets to the Green Monster standing room, you should know that they sell way more standing room tickets than there is room for people to stand.  So if you get to the game less than 30 minutes early, there likely won't be any room along the standing room section and you'll have to find some other awkward place to stand (on a set of stairs, for example).  So either go early or consider some other tickets.",
+upvotes:334,
+downvotes:3,
+id:"48704713950215891091"},
+
+{action:"Buying",
+subject:"Time Share in Florida",
+tags:[],
+content:"If you are considering buying a time share here, then you definitely need to reconsider.  Did you know that once you sign into a time share contract, you are required to pay the fees for eternity (unless you can manage to sell it to somebody else).  That means that your next of kin will inherit the time share from you and have to legally keep paying the fees.  It sounds like this couldn't possibly be legal, but it somehow is.  So if you are going to buy a time share, consider consulting all your current (and future?) decendants.",
+upvotes:11067,
+downvotes:0,
+id:"84220446842375510932"}
 ];
 
 module.exports = posts;

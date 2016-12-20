@@ -35,7 +35,6 @@ var Giddit = React.createClass({
 
     render: function() {
         content = <Create />;
-console.log(this.state.stage);
         switch(this.state.stage) {
             case "find":
                 content = <Find />;

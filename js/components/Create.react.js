@@ -19,19 +19,12 @@ var Create = React.createClass({
         var action = document.getElementById("action").value;
         var subject = document.getElementById("subject").value;
         var content = document.getElementById("details").value;
-        console.log(action);
-        console.log(subject);
-        console.log(content);
         PostActions.createPost({action: action,
                                 subject: subject,
                                 content: content});
     },
 
     render: function() {
-        //var optionViews = [];
-        //for (var i = 0; i < options.length; ++i) {
-        //    optionViews.push(<option key={i} value={options[i]} />);
-       // }
 
         return (
             <div className="create">

@@ -25,7 +25,7 @@
     "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
     "test": "jest"
   },
-  "author": "Bill Fisher",
+  "author": "Liam and Lucas Palmer",
   "browserify": {
     "transform": [
       "reactify",

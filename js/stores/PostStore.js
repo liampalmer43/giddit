@@ -6,21 +6,24 @@ var AWS = require('aws-sdk');
 
 var CHANGE_EVENT = 'change';
 
-// AWS variables.
+// AWS variables. No longer in use!
 AWS.config.update({
-      accessKeyId: "AKIAJGTHCL75V2SQH76A",
-      secretAccessKey: "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",
+      accessKeyId: "",
+      secretAccessKey: "",
       "region": "us-east-2"
 });
 var ep = new AWS.Endpoint('giddit.io.s3-website.us-east-2.amazonaws.com');
 var s3 = new AWS.S3();
 
-var Posts = []; //require('../constant/Posts')
+var Posts = require('../constants/Posts');
 var state = Posts;
 var stage = "home";
 
 // Retrieve all posts from S3.
 function getS3Posts() {
+    // No longer get posts from S3.
+    return;
+
     var params = {
         Bucket: 'giddit.io', /* required */
         RequestPayer: 'requester'
@@ -51,7 +54,6 @@ function getS3Posts() {
 }
 
 function getPosts(param) {
-console.log(param);
     if (param === "") {
         state = Posts;
         PostStore.emitChange();
@@ -91,7 +93,9 @@ function createPost(params) {
                 upvotes: 0,
                 downvotes: 0,
                 id: getRandomId()};
-    
+
+    // No longer interact with S3.
+/*    
     var params = {Bucket: 'giddit.io', Key: post["id"], Body: JSON.stringify(post)};
     s3.putObject(params, function(err, data) {
         if (err) {
@@ -100,7 +104,7 @@ function createPost(params) {
             console.log("Success uploading data to S3");
         }
     });
-
+*/
     Posts.push(post);
     stage = "find";
     PostStore.emitChange();
